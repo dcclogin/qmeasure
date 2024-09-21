@@ -7,6 +7,12 @@ public class Main {
         Commodity c3 = new Commodity();
         c1.deal(c2); // c1 measures c2 which gives c1's representation of c2's Value
         c1.deal(c3);
-        System.out.println(c1.getExchanged() + " " + c1.getFailure() + " " + c2.getExchanged() + " " + c2.getFailure());
+        c2.deal(c3);
+        System.out.println(c1.getExchanged() + " "
+                + c1.getFailure() + " "
+                + c2.getExchanged() + " "
+                + c2.getFailure());
+        System.out.println(c1.getValueRepresented());
+        System.out.println(c2.getIntrinsic());
     }
 }

@@ -3,7 +3,7 @@ package exchange.values;
 import java.util.Optional;
 import java.util.Random;
 
-public class ValueTop extends Value {
+public class ValueTop implements Value {
 
     public Optional<Integer> compareTo(Value o) {
         if (o instanceof ValueTop) {
@@ -15,11 +15,11 @@ public class ValueTop extends Value {
         }
     }
 
-    Value upper() {
+    public Value upper() {
         return this;
     }
 
-    Value lower() {
+    public Value lower() {
         Random r = new Random();
         if (r.nextBoolean()) {
             return new ValueL();
@@ -28,7 +28,11 @@ public class ValueTop extends Value {
         }
     }
 
-    Value negate() {
+    public Value negate() {
         return new ValueBot();
+    }
+
+    public Value compose(Value v) {
+        return null;
     }
 }

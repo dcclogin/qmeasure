@@ -2,7 +2,7 @@ package exchange.values;
 
 import java.util.Optional;
 
-public class ValueL extends Value {
+public class ValueL implements Value {
     public Optional<Integer> compareTo(Value o) {
         return switch (o) {
             case ValueR _ -> Optional.empty();
@@ -13,15 +13,19 @@ public class ValueL extends Value {
         };
     }
 
-    Value upper() {
+    public Value upper() {
         return new ValueTop();
     }
 
-    Value lower() {
+    public Value lower() {
         return new ValueBot();
     }
 
-    Value negate() {
+    public Value negate() {
         return new ValueR();
+    }
+
+    public Value compose(Value v) {
+        return null;
     }
 }

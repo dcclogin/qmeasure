@@ -1,7 +1,8 @@
 package exchange.values;
 
-public abstract class Value implements VComparable<Value> {
-    abstract Value upper();
-    abstract Value lower();
-    abstract Value negate();
+public interface Value extends VComparable<Value> {
+    Value upper();
+    Value lower();
+    Value negate();
+    Value compose(Value v);
 }
