@@ -1,4 +1,4 @@
-package exchange.values;
+package exchange.values.lattice4;
 
 import java.util.Optional;
 
