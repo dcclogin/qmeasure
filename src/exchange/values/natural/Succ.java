@@ -1,5 +1,7 @@
 package exchange.values.natural;
 
+import exchange.values.Value;
+
 public class Succ implements Nat {
 
     private final Nat val;
@@ -32,5 +34,20 @@ public class Succ implements Nat {
         } else {
             return val.comparedTo(o.sub1());
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Nat[%d]", n);
+    }
+
+    @Override
+    public Nat inverse() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isInverse(Value a) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

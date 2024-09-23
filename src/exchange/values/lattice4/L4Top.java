@@ -1,5 +1,7 @@
 package exchange.values.lattice4;
 
+import exchange.values.Value;
+
 import java.util.Optional;
 import java.util.Random;
 
@@ -39,5 +41,15 @@ public class L4Top implements L4 {
     @Override
     public String toString() {
         return "top";
+    }
+
+    @Override
+    public Value inverse() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isInverse(Value a) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

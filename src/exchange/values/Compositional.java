@@ -1,4 +1,5 @@
 package exchange.values;
 
-public interface Compositional {
+public interface Compositional<T> {
+    T compose(T a);
 }

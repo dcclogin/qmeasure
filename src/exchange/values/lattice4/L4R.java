@@ -1,5 +1,7 @@
 package exchange.values.lattice4;
 
+import exchange.values.Value;
+
 import java.util.Optional;
 
 public class L4R implements L4 {
@@ -33,5 +35,15 @@ public class L4R implements L4 {
     @Override
     public String toString() {
         return "right";
+    }
+
+    @Override
+    public Value inverse() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isInverse(Value a) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

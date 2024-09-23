@@ -12,6 +12,7 @@ public class Main {
                 + c1.getFailure() + " "
                 + c2.getExchanged() + " "
                 + c2.getFailure());
+        // no identity, no inverse, no commutativity
         System.out.println(c1.getValueRepresented());
         System.out.println(c2.getValueRepresented());
         System.out.println(c3.getValueRepresented());
@@ -21,5 +22,7 @@ public class Main {
 
         // emergence of money as a master-signifier
         // trying to represent Value for all commodities
+
+        System.out.println(Transcendental.contingentValS4());
     }
 }

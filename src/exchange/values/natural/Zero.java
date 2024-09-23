@@ -1,5 +1,6 @@
 package exchange.values.natural;
 
+import exchange.values.Value;
 import org.jetbrains.annotations.NotNull;
 
 public class Zero implements Nat {
@@ -25,11 +26,27 @@ public class Zero implements Nat {
         return n;
     }
 
+    @Override
     public int comparedTo(Nat o) {
         if (o instanceof Zero) {
             return 0;
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Nat[0]";
+    }
+
+    @Override
+    public Nat inverse() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isInverse(Value a) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

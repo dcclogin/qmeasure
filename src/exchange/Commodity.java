@@ -49,21 +49,18 @@ public class Commodity {
         return valueRepresented;
     }
 
-    // represent a Value for another Commodity c
-    // may call random in Value
+    // represent a contingent Value for another Commodity c
+    // TODO: add the role of Mediator
     public Value represent(Commodity c) {
-        Random r = new Random();
-        int i = r.nextInt(4);
-        return switch (i) {
-            case 0 -> { yield new L4Bot(); }
-            case 1 -> { yield new L4L(); }
-            case 2 -> { yield new L4R(); }
-            case 3 -> { yield new L4Top(); }
-            default -> throw new Error("cannot represent Value.");
-        };
+        //return Transcendental.contingentValL4();
+        //return Transcendental.contingentValNat(1, 10);
+        return Transcendental.contingentValS4();
     }
 
     // make an exchange with another Commodity c
+    // no imposition of being inverse to each other for L4 and Nat
+    // strict imposition of inverse for S4
+    // TODO: add the role of Mediator
     public Optional<Quantity> deal(Commodity c) {
         if (c.equals(this)) return Optional.empty();
 
