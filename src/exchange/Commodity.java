@@ -1,5 +1,6 @@
 package exchange;
 
+import exchange.values.Value;
 import exchange.values.lattice4.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +15,7 @@ public class Commodity {
     private int failure;
     //private int represented;
     //private int representing;
-    private @NotNull Optional<SimpleEntry<L4, Commodity>> valueRepresented;
+    private @NotNull Optional<Quantity> valueRepresented;
     //private List<SimpleEntry<Commodity, Value>> promises;
 
     public Commodity(String name) {
@@ -41,16 +42,16 @@ public class Commodity {
     private void tickFailure() {
         failure++;
     }
-    private void setValueRepresented(SimpleEntry<L4, Commodity> v) {
+    private void setValueRepresented(Quantity v) {
         valueRepresented = Optional.of(v);
     }
-    public @NotNull Optional<SimpleEntry<L4, Commodity>> getValueRepresented() {
+    public @NotNull Optional<Quantity> getValueRepresented() {
         return valueRepresented;
     }
 
     // represent a Value for another Commodity c
     // may call random in Value
-    public L4 represent(Commodity c) {
+    public Value represent(Commodity c) {
         Random r = new Random();
         int i = r.nextInt(4);
         return switch (i) {
@@ -63,13 +64,13 @@ public class Commodity {
     }
 
     // make an exchange with another Commodity c
-    public Optional<SimpleEntry<L4, L4>> deal(Commodity c) {
+    public Optional<Quantity> deal(Commodity c) {
         if (c.equals(this)) return Optional.empty();
 
-        L4 tc = this.represent(c);
-        L4 ct = c.represent(this);
-        SimpleEntry<L4, Commodity> meForOther = new SimpleEntry<>(tc, this);
-        SimpleEntry<L4, Commodity> otherForMe = new SimpleEntry<>(ct, c);
+        Value tc = this.represent(c);
+        Value ct = c.represent(this);
+        Quantity meForOther = new Quantity(tc, this);
+        Quantity otherForMe = new Quantity(ct, c);
 
         Random r = new Random();
         int i = r.nextInt(2);
@@ -83,14 +84,14 @@ public class Commodity {
             c.tickExchanged();
             this.setValueRepresented(otherForMe);
             c.setValueRepresented(meForOther);
-            return Optional.of(new SimpleEntry<>(tc, ct));
+            return Optional.of(meForOther);
         }
     }
 
     // make an exchange with another commodity c (repeated failure until a deal is made)
-    public Optional<SimpleEntry<L4, L4>> forceDeal(Commodity c) {
+    public Optional<Quantity> forceDeal(Commodity c) {
         if (c.equals(this)) return Optional.empty();
-        Optional<SimpleEntry<L4, L4>> r = this.deal(c);
+        Optional<Quantity> r = this.deal(c);
         while (r.isEmpty()) {
             r = this.deal(c);
         }

@@ -18,5 +18,8 @@ public class Main {
 
         c2.forgetValue();
         System.out.println(c2.getValueRepresented());
+
+        // emergence of money as a master-signifier
+        // trying to represent Value for all commodities
     }
 }
