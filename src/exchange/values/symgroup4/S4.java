@@ -10,6 +10,5 @@ public interface S4 extends Value, Compositional<S4> {
     S4 inverse();
     int[] getEs();
     boolean isId();
-    // boolean isInverse(S4 a)
     boolean isInverse(Value a);
 }

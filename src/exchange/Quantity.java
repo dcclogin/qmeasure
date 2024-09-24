@@ -11,6 +11,12 @@ public class Quantity {
         this.unit = unit;
     }
 
+    public Value getValue() {
+        return value;
+    }
+    public Commodity getUnit() {
+        return unit;
+    }
     @Override
     public String toString() {
         return value.toString() + " " + unit.toString();

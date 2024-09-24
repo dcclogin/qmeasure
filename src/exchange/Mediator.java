@@ -3,7 +3,11 @@ package exchange;
 import exchange.values.Value;
 import exchange.values.symgroup4.S4;
 
-// attempt to incorporate objet a into the commodity exchange framework???
+import java.util.Random;
+
+// attempt to incorporate object a into the commodity exchange framework
+// can mediator just be another commodity?
+// how to account for the "emergence" of money / master-signifier?
 public class Mediator {
 
     private Value a;
@@ -14,8 +18,15 @@ public class Mediator {
         this.b = b;
     }
 
+    public Value get_a() {
+        return a;
+    }
+    public Value get_b() {
+        return b;
+    }
+
     private boolean isInverse(Value a, Value b) {
-        return a.isInverse(b) && b.isInverse(a);
+        return a.isInverse(b);
     }
 
     private void compromise_b() {
@@ -32,10 +43,19 @@ public class Mediator {
     }
     private void antagonistic() {}
 
-    public Value get_a() {
-        return a;
+    // if antagonistic return false
+    // currently just random
+    public boolean mediate() {
+        Random r = new Random();
+        int i = r.nextInt(4);
+        return switch (i) {
+            case 0 -> { antagonistic(); yield false; }
+            case 1 -> { compromise_a(); yield true; }
+            case 2 -> { compromise_b(); yield true; }
+            case 3 -> { compromise_both(); yield true; }
+            default -> throw new IllegalStateException("Unexpected value: " + i);
+        };
     }
-    public Value get_b() {
-        return b;
-    }
+
+
 }

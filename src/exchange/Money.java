@@ -1,6 +1,8 @@
 package exchange;
 
 // "evaluator"
+// emergence of money as a master-signifier
+// one commodity trying to represent Value for all commodities
 public class Money extends Commodity {
 
     public Money(String name) {

@@ -7,7 +7,7 @@ public class S4E implements S4 {
     private final int[] es;
 
     public S4E(int[] es) {
-        assert es.length == 4;
+        assert (es.length == 4);
         this.es = es;
     }
 
@@ -45,6 +45,7 @@ public class S4E implements S4 {
 
     @Override
     public S4 sqrt() {
+        // create ad hoc commodity during computation?
         throw new UnsupportedOperationException();
     }
 

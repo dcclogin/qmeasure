@@ -3,19 +3,17 @@ package exchange;
 import exchange.values.Value;
 import exchange.values.lattice4.*;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Optional;
-import java.util.Random;
+
 
 public class Commodity {
     private final String name;
-    private Object intrinsic;
+    private final Object intrinsic;
     private int exchanged;
     private int failure;
+    private @NotNull Optional<Quantity> valueRepresented;
     //private int represented;
     //private int representing;
-    private @NotNull Optional<Quantity> valueRepresented;
     //private List<SimpleEntry<Commodity, Value>> promises;
 
     public Commodity(String name) {
@@ -23,8 +21,8 @@ public class Commodity {
         intrinsic = new NonValue();
         exchanged = 0;
         failure = 0;
-        //promises = new ArrayList<>();
         valueRepresented = Optional.empty();
+        //promises = new ArrayList<>();
     }
 
     public Object getIntrinsic() {
@@ -49,50 +47,54 @@ public class Commodity {
         return valueRepresented;
     }
 
-    // represent a contingent Value for another Commodity c
-    // TODO: add the role of Mediator
+    // represent a Value for another Commodity c
+    // "one" this for ??? c
     public Value represent(Commodity c) {
+        if (valueRepresented.isPresent()) {
+            if (valueRepresented.get().getUnit().equals(c)) {
+                return valueRepresented.get().getValue().inverse();
+            }
+        }
         //return Transcendental.contingentValL4();
         //return Transcendental.contingentValNat(1, 10);
         return Transcendental.contingentValS4();
     }
 
     // make an exchange with another Commodity c
-    // no imposition of being inverse to each other for L4 and Nat
     // strict imposition of inverse for S4
-    // TODO: add the role of Mediator
+    // TODO: refine the role of Mediator
     public Optional<Quantity> deal(Commodity c) {
         if (c.equals(this)) return Optional.empty();
 
         Value tc = this.represent(c);
         Value ct = c.represent(this);
-        Quantity meForOther = new Quantity(tc, this);
-        Quantity otherForMe = new Quantity(ct, c);
 
-        Random r = new Random();
-        int i = r.nextInt(2);
+        Mediator m = new Mediator(tc, ct);
+        if (m.mediate()) {
+            Quantity meForOther = new Quantity(m.get_a(), this);
+            Quantity otherForMe = new Quantity(m.get_b(), c);
 
-        if (i == 0) {
-            this.tickFailure();
-            c.tickFailure();
-            return Optional.empty();
-        } else {
             this.tickExchanged();
             c.tickExchanged();
             this.setValueRepresented(otherForMe);
             c.setValueRepresented(meForOther);
             return Optional.of(meForOther);
+        } else {
+            // also keep antagonistic?
+            this.tickFailure();
+            c.tickFailure();
+            return Optional.empty();
         }
     }
 
     // make an exchange with another commodity c (repeated failure until a deal is made)
-    public Optional<Quantity> forceDeal(Commodity c) {
-        if (c.equals(this)) return Optional.empty();
+    public Quantity forceDeal(Commodity c) {
+        //if (c.equals(this)) return Optional.empty();
         Optional<Quantity> r = this.deal(c);
         while (r.isEmpty()) {
             r = this.deal(c);
         }
-        return r;
+        return r.get();
     }
 
 
