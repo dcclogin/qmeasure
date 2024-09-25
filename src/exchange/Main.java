@@ -1,6 +1,7 @@
 package exchange;
 
 import exchange.values.Value;
+import exchange.values.symgroup2.S2;
 
 public class Main {
 
@@ -49,8 +50,8 @@ public class Main {
         Value v1 = q1.getValue().compose(q2.getValue());
 
         System.out.println("After 3rd");
-        
-        c3.forceDeal(c2);
+
+        c3.commDeal(c2);
 
         q1 = c1.getValueRepresented().get();
         q2 = c2.getValueRepresented().get();
@@ -66,10 +67,16 @@ public class Main {
 
     }
 
+    public static void ex3() {
+        Money<S2> m0 = new Money<>("m0");
+        System.out.println(m0.selfRepresent());
+    }
+
     // atonal world
     // without intervene of master-signifier
     public static void main(String[] args) {
         ex1();
         ex2();
+        ex3();
     }
 }

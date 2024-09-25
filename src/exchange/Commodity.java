@@ -22,7 +22,6 @@ public class Commodity {
         exchanged = 0;
         failure = 0;
         valueRepresented = Optional.empty();
-        //promises = new ArrayList<>();
     }
 
     public Object getIntrinsic() {
@@ -56,7 +55,7 @@ public class Commodity {
                 return valueRepresented.get().getValue().inverse();
             }
         }
-        return Transcendental.contingentValS2();
+        return Transcendental.contingentValS4();
     }
 
 
