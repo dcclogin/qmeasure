@@ -28,7 +28,7 @@ public class Main {
     }
 
     /* 3-commodity */
-    /* enforce commutativity ??? */
+    /* no commutativity */
     public static void ex2 () {
         System.out.println("[Example 2: 3-commodity]:");
         Commodity c1 = new Commodity("c1");
@@ -37,25 +37,37 @@ public class Main {
 
         c1.forceDeal(c2);
         c3.forceDeal(c1);
-        // c3.deal(c2) ???
+        //c3.forceDeal(c2);
 
         Quantity q1, q2, q3;
-        Value v1, v2, v3;
         q1 = c1.getValueRepresented().get();
         q2 = c2.getValueRepresented().get();
         q3 = c3.getValueRepresented().get();
-        v1 = q1.getValue();
-        v2 = q2.getValue();
-        v3 = q3.getValue();
-
-        // no identity, no inverse, no commutativity
         System.out.println(q1);
         System.out.println(q2);
         System.out.println(q3);
-        System.out.println(v1.isInverse(v3));
+        Value v1 = q1.getValue().compose(q2.getValue());
+
+        System.out.println("After 3rd");
+        
+        c3.forceDeal(c2);
+
+        q1 = c1.getValueRepresented().get();
+        q2 = c2.getValueRepresented().get();
+        q3 = c3.getValueRepresented().get();
+        System.out.println(q1);
+        System.out.println(q2);
+        System.out.println(q3);
+        Value v2 = q2.getValue();
+
+        System.out.println("commutative?");
+        System.out.println(v1);
+        System.out.println(v2);
+
     }
 
-
+    // atonal world
+    // without intervene of master-signifier
     public static void main(String[] args) {
         ex1();
         ex2();

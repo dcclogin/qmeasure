@@ -59,10 +59,10 @@ public class S4E implements S4 {
     }
 
     @Override
-    public S4 compose(S4 a) {
+    public S4 compose(Value a) {
         int[] new_es = new int[es.length];
         for (int i = 0; i < es.length; i++) {
-            new_es[i] = es[a.getEs()[i]];
+            new_es[i] = es[((S4) a).getEs()[i]];
         }
         return new S4E(new_es);
     }

@@ -1,6 +1,7 @@
 package exchange;
 
 import exchange.values.Value;
+import exchange.values.symgroup2.S2;
 import exchange.values.symgroup4.S4;
 
 import java.util.Random;
@@ -26,7 +27,7 @@ public class Mediator {
     }
 
     private boolean isInverse(Value a, Value b) {
-        return a.isInverse(b);
+        return a.isInverse(b) && b.isInverse(a);
     }
 
     private void compromise_b() {
@@ -40,12 +41,17 @@ public class Mediator {
             a = Transcendental.contingentValS4();
             b = a.inverse();
         }
+        if (b instanceof S2 && a instanceof S2) {
+            a = Transcendental.contingentValS2();
+            b = a.inverse();
+        }
     }
     private void antagonistic() {}
 
     // if antagonistic return false
     // currently just random
     public boolean mediate() {
+        if (isInverse(a, b)) { return true; }
         Random r = new Random();
         int i = r.nextInt(4);
         return switch (i) {

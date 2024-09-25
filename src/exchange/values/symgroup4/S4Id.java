@@ -48,8 +48,8 @@ public class S4Id implements S4 {
 
     /* id * a = a */
     @Override
-    public S4 compose(S4 a) {
-        return a;
+    public S4 compose(Value a) {
+        return ((S4) a);
     }
 
     @Override

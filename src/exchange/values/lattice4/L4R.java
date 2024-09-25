@@ -28,7 +28,7 @@ public class L4R implements L4 {
         return new L4L();
     }
 
-    public L4 compose(L4 v) {
+    public L4 compose(Value v) {
         return null;
     }
 

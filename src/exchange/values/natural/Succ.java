@@ -47,6 +47,11 @@ public class Succ implements Nat {
     }
 
     @Override
+    public Value compose(Value v) {
+        return null;
+    }
+
+    @Override
     public boolean isInverse(Value a) {
         throw new UnsupportedOperationException("Not supported yet.");
     }

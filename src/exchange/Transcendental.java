@@ -5,6 +5,8 @@ import exchange.values.lattice4.L4Bot;
 import exchange.values.lattice4.L4L;
 import exchange.values.lattice4.L4R;
 import exchange.values.lattice4.L4Top;
+import exchange.values.symgroup2.S2Id;
+import exchange.values.symgroup2.S2X;
 import exchange.values.symgroup4.S4E;
 
 import java.util.ArrayList;
@@ -50,5 +52,12 @@ public class Transcendental {
             es[i] = a.get(i);
         }
         return new S4E(es);
+    }
+
+    public static Value contingentValS2() {
+        Random r = new Random();
+        boolean i = r.nextBoolean();
+        if (i) { return new S2Id(); }
+        else { return new S2X(); }
     }
 }

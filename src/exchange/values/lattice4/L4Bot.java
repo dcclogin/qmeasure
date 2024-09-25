@@ -34,7 +34,7 @@ public class L4Bot implements L4 {
         return new L4Top();
     }
 
-    public L4 compose(L4 v) {
+    public L4 compose(Value v) {
         return null;
     }
 
